@@ -6,15 +6,14 @@ gem 'rails', '4.0.0'
 # Use postgresql as the database for Active Record
 gem 'pg'
 
-group :development, :test do
 
-  gem 'rspec-rails', '2.13.1'
-end
+  gem 'rspec-rails'
 
-group :test do
-  gem 'selenium-webdriver', '2.0.0'
-  gem 'capybara', '2.1.0'
-end
+
+
+  gem 'selenium-webdriver'
+  gem 'capybara'
+
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
