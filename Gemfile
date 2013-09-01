@@ -7,9 +7,8 @@ gem 'bootstrap-sass'
 # Use postgresql as the database for Active Record
 gem 'pg'
 
-
   gem 'rspec-rails'
- 
+  gem 'protected_attributes'
 
 
   gem 'selenium-webdriver'

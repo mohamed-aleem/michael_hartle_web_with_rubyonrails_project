@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe User do
-  before {@user = User.new(name: "Example user", email: "user@example.com")}
+  before {@user = User.new(name: "Example user", email: "user@example.com", password: "2312321")}
   subject {@user}
   it {should respond_to(:name)}
   it {should respond_to(:email)}
@@ -50,7 +50,33 @@ describe User do
     }
     it {should_not be_valid}
     
+  end 
+  
+  describe "password encryption" do
+    it {should_not be_blank}
   end
   
+  describe "haspassword? method" do
+    before {@user = User.create(name: "Example user", email: "user@example.com", password: "2312321")}
+    it "should be true if the password match" do
+      @user.has_password?(@user.password).should be_true
+    end
+    
+  end
+  describe "authenticate method" do
+    before {@user = User.create(name: "Example user", email: "user@example.com", password: "2312321")}
+    it "should return nil on email/password mismatch" do
+      wrong_password_user = User.authenticate(@user.email,"wrong_password")
+      wrong_password_user.should be_nil
+    end
+    it "should return nil on email with no user" do
+      wrong_password_user = User.authenticate("no user",@user.password)
+      wrong_password_user.should be_nil
+    end
+    it "should return user on email/password match" do
+      wrong_password_user = User.authenticate(@user.email, @user.password)
+      wrong_password_user.should == @user
+    end
+  end
   
 end
