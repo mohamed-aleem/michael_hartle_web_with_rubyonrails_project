@@ -16,6 +16,8 @@ SampleApp::Application.configure do
   config.serve_static_assets  = true
   config.static_cache_control = "public, max-age=3600"
 
+  ActiveModel::SecurePassword.min_cost = true
+  
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false

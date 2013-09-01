@@ -66,15 +66,11 @@ describe User do
   describe "authenticate method" do
     before {@user = User.create(name: "Example user", email: "user@example.com", password: "2312321")}
     it "should return nil on email/password mismatch" do
-      wrong_password_user = User.authenticate(@user.email,"wrong_password")
-      wrong_password_user.should be_nil
-    end
-    it "should return nil on email with no user" do
-      wrong_password_user = User.authenticate("no user",@user.password)
+      wrong_password_user = @user.authenticate("wrong_password")
       wrong_password_user.should be_nil
     end
     it "should return user on email/password match" do
-      wrong_password_user = User.authenticate(@user.email, @user.password)
+      wrong_password_user = @user.authenticate(@user.password)
       wrong_password_user.should == @user
     end
   end
