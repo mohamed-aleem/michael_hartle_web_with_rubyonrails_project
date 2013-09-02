@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   
-  attr_accessor :password
+  
   attr_accessible :name, :email, :password, :password_confirmation
   
   validates :name, presence: true, length: {maximum: 50}
@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
                        confirmation: true,
                        length: {minimum: 6}
   before_save :encrypt_password
+  before_create :create_remember_token
+  
+  
   
   def authenticate(user_password)
     return self if has_password?(user_password)
@@ -19,6 +22,15 @@ class User < ActiveRecord::Base
     encrypted_password == encrypt(submitted_password)
   end
   private
+  
+    #remember tokens functions
+    def create_remember_token
+      self.remember_token = SecureRandom.urlsafe_base64
+    end
+    
+    
+    
+    # encryption functions
     def encrypt_password
       self.salt = make_salt unless self.has_password?(password)
       self.encrypted_password = encrypt(password)
