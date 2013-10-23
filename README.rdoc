@@ -1,3 +1,3 @@
 == README
 
-This project to keep up with micheal hartle book about learnning web development with ruby on rails.
+This project to keep up with michael hartl book about learnning web development with ruby on rails.
